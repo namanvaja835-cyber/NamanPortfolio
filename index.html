@@ -1,819 +1,1178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Naman Vaja | Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <style>
-    * { font-family: 'Inter', sans-serif; }
-    html { scroll-behavior: smooth; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Naman Vaja | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
 
-    /* Gradient text */
-    .grad { background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* Hero blob */
-    .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.18; animation: blobPulse 6s ease-in-out infinite alternate; }
-    @keyframes blobPulse { 0%{transform:scale(1) translate(0,0);} 100%{transform:scale(1.15) translate(30px,20px);} }
+        /* Gradient text */
+        .grad {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    /* Particle canvas */
-    #particles { position:fixed; top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0; }
+        /* Hero blob */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.18;
+            animation: blobPulse 6s ease-in-out infinite alternate;
+        }
 
-    /* Scroll animations */
-    .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-    .reveal-left { opacity:0; transform:translateX(-50px); transition:opacity 0.7s ease, transform 0.7s ease; }
-    .reveal-left.visible { opacity:1; transform:translateX(0); }
-    .reveal-right { opacity:0; transform:translateX(50px); transition:opacity 0.7s ease, transform 0.7s ease; }
-    .reveal-right.visible { opacity:1; transform:translateX(0); }
+        @keyframes blobPulse {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
 
-    /* Card hover */
-    .card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(99,102,241,0.25); }
+            100% {
+                transform: scale(1.15) translate(30px, 20px);
+            }
+        }
 
-    /* Skill bar */
-    .skill-bar { height:8px; border-radius:9999px; background:#1e293b; overflow:hidden; }
-    .skill-fill { height:100%; border-radius:9999px; background:linear-gradient(90deg,#6366f1,#ec4899); width:0%; transition:width 1.2s ease; }
+        /* Particle canvas */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    /* Nav glass */
-    nav { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
 
-    /* Timeline line */
-    .timeline::before { content:''; position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(180deg,#6366f1,#ec4899); transform:translateX(-50%); }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    /* Certificate card flip */
-    .flip-card { perspective:1000px; }
-    .flip-inner { transition:transform 0.6s; transform-style:preserve-3d; position:relative; }
-    .flip-card:hover .flip-inner { transform:rotateY(8deg) scale(1.03); }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
 
-    /* Typewriter cursor */
-    .cursor { display:inline-block; width:3px; height:1.2em; background:#6366f1; margin-left:2px; animation:blink 1s step-end infinite; vertical-align:text-bottom; }
-    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
-    /* Section bg */
-    .section-alt { background: #0f172a; }
-    body { background: #020817; color: #e2e8f0; }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
 
-    /* Glow button */
-    .btn-glow { background: linear-gradient(135deg, #6366f1, #8b5cf6); transition: all 0.3s; position:relative; overflow:hidden; }
-    .btn-glow::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,#8b5cf6,#ec4899); opacity:0; transition:opacity 0.3s; }
-    .btn-glow:hover::after { opacity:1; }
-    .btn-glow span { position:relative; z-index:1; }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
-    /* nav link underline */
-    .nav-link { position:relative; }
-    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:linear-gradient(90deg,#6366f1,#ec4899); transition:width 0.3s; }
-    .nav-link:hover::after { width:100%; }
+        /* Card hover */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    /* Avatar ring */
-    .avatar-ring { background:linear-gradient(135deg,#6366f1,#ec4899); padding:3px; border-radius:9999px; display:inline-block; }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.25);
+        }
 
-    /* Floating badge */
-    @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
-    .float { animation: float 3s ease-in-out infinite; }
+        /* Skill bar */
+        .skill-bar {
+            height: 8px;
+            border-radius: 9999px;
+            background: #1e293b;
+            overflow: hidden;
+        }
 
-    /* Mobile menu */
-    #mobile-menu { display:none; }
-    #mobile-menu.open { display:block; }
+        .skill-fill {
+            height: 100%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #6366f1, #ec4899);
+            width: 0%;
+            transition: width 1.2s ease;
+        }
 
-    /* Stats counter */
-    .stat-num { font-size:2.5rem; font-weight:900; background:linear-gradient(135deg,#6366f1,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  </style>
+        /* Nav glass */
+        nav {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        /* Timeline line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #6366f1, #ec4899);
+            transform: translateX(-50%);
+        }
+
+        /* Certificate card flip */
+        .flip-card {
+            perspective: 1000px;
+        }
+
+        .flip-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .flip-card:hover .flip-inner {
+            transform: rotateY(8deg) scale(1.03);
+        }
+
+        /* Typewriter cursor */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: #6366f1;
+            margin-left: 2px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Section bg */
+        .section-alt {
+            background: #0f172a;
+        }
+
+        body {
+            background: #020817;
+            color: #e2e8f0;
+        }
+
+        /* Glow button */
+        .btn-glow {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glow::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn-glow:hover::after {
+            opacity: 1;
+        }
+
+        .btn-glow span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* nav link underline */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #ec4899);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Avatar ring */
+        .avatar-ring {
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            padding: 3px;
+            border-radius: 9999px;
+            display: inline-block;
+        }
+
+        /* Floating badge */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Mobile menu */
+        #mobile-menu {
+            display: none;
+        }
+
+        #mobile-menu.open {
+            display: block;
+        }
+
+        /* Stats counter */
+        .stat-num {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
 </head>
+
 <body class="overflow-x-hidden">
 
-<!-- Particle Canvas -->
-<canvas id="particles"></canvas>
+    <!-- Particle Canvas -->
+    <canvas id="particles"></canvas>
 
-<!-- NAVBAR -->
-<nav class="fixed top-0 w-full z-50 bg-[#020817]/80 border-b border-white/5">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="#hero" class="text-xl font-bold grad">NV</a>
-    <div class="hidden md:flex gap-8 text-sm font-medium text-slate-300">
-      <a href="#about" class="nav-link hover:text-white transition">About</a>
-      <a href="#skills" class="nav-link hover:text-white transition">Skills</a>
-      <a href="#experience" class="nav-link hover:text-white transition">Experience</a>
-      <a href="#education" class="nav-link hover:text-white transition">Education</a>
-      <a href="#projects" class="nav-link hover:text-white transition">Projects</a>
-      <a href="#certificates" class="nav-link hover:text-white transition">Certificates</a>
-      <a href="#volunteer" class="nav-link hover:text-white transition">Volunteer</a>
-      <a href="#contact" class="nav-link hover:text-white transition">Contact</a>
-    </div>
-    <button onclick="document.getElementById('mobile-menu').classList.toggle('open')" class="md:hidden text-slate-300">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
-  </div>
-  <div id="mobile-menu" class="md:hidden bg-[#0f172a] px-6 pb-4 space-y-3 text-sm font-medium text-slate-300">
-    <a href="#about" class="block hover:text-white">About</a>
-    <a href="#skills" class="block hover:text-white">Skills</a>
-    <a href="#experience" class="block hover:text-white">Experience</a>
-    <a href="#education" class="block hover:text-white">Education</a>
-    <a href="#projects" class="block hover:text-white">Projects</a>
-    <a href="#certificates" class="block hover:text-white">Certificates</a>
-    <a href="#volunteer" class="block hover:text-white">Volunteer</a>
-    <a href="#contact" class="block hover:text-white">Contact</a>
-  </div>
-</nav>
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 w-full z-50 bg-[#020817]/80 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#hero" class="text-xl font-bold grad">NV</a>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="nav-link hover:text-white transition">About</a>
+                <a href="#skills" class="nav-link hover:text-white transition">Skills</a>
+                <a href="#experience" class="nav-link hover:text-white transition">Experience</a>
+                <a href="#education" class="nav-link hover:text-white transition">Education</a>
+                <a href="#projects" class="nav-link hover:text-white transition">Projects</a>
+                <a href="#certificates" class="nav-link hover:text-white transition">Certificates</a>
+                <a href="#volunteer" class="nav-link hover:text-white transition">Volunteer</a>
+                <a href="#contact" class="nav-link hover:text-white transition">Contact</a>
+            </div>
+            <button onclick="document.getElementById('mobile-menu').classList.toggle('open')"
+                class="md:hidden text-slate-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="md:hidden bg-[#0f172a] px-6 pb-4 space-y-3 text-sm font-medium text-slate-300">
+            <a href="#about" class="block hover:text-white">About</a>
+            <a href="#skills" class="block hover:text-white">Skills</a>
+            <a href="#experience" class="block hover:text-white">Experience</a>
+            <a href="#education" class="block hover:text-white">Education</a>
+            <a href="#projects" class="block hover:text-white">Projects</a>
+            <a href="#certificates" class="block hover:text-white">Certificates</a>
+            <a href="#volunteer" class="block hover:text-white">Volunteer</a>
+            <a href="#contact" class="block hover:text-white">Contact</a>
+        </div>
+    </nav>
 
-<!-- HERO -->
-<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-  <!-- Blobs -->
-  <div class="blob w-96 h-96 bg-violet-600 top-10 left-10"></div>
-  <div class="blob w-80 h-80 bg-pink-600 bottom-10 right-10" style="animation-delay:2s"></div>
-  <div class="blob w-64 h-64 bg-indigo-600 top-1/2 left-1/2" style="animation-delay:4s"></div>
+    <!-- HERO -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Blobs -->
+        <div class="blob w-96 h-96 bg-violet-600 top-10 left-10"></div>
+        <div class="blob w-80 h-80 bg-pink-600 bottom-10 right-10" style="animation-delay:2s"></div>
+        <div class="blob w-64 h-64 bg-indigo-600 top-1/2 left-1/2" style="animation-delay:4s"></div>
 
-  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-    <!-- Avatar placeholder -->
-    <div class="reveal mb-8 flex justify-center">
-      <div class="avatar-ring float">
-        <div class="w-36 h-36 rounded-full bg-gradient-to-br from-violet-700 to-indigo-900 flex items-center justify-center text-5xl font-black text-white">NV</div>
-      </div>
-    </div>
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <!-- Avatar -->
+            <div class="reveal mb-8 flex justify-center">
+                <div class="avatar-ring float">
+                    <img src="Profile Image.jpeg" alt="Naman Vaja" class="w-36 h-36 rounded-full object-cover border-4 border-[#020817]">
+                </div>
+            </div>
 
-    <div class="reveal" style="transition-delay:0.1s">
-      <p class="text-indigo-400 font-semibold tracking-widest uppercase text-sm mb-3">Welcome to my portfolio</p>
-      <h1 class="text-5xl md:text-7xl font-black mb-4 leading-tight">
-        Hi, I'm <span class="grad">Naman Vaja</span>
-      </h1>
-      <p class="text-xl md:text-2xl text-slate-300 mb-2">
-        <span id="typewriter"></span><span class="cursor"></span>
-      </p>
-      <p class="text-slate-400 mt-4 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
-        Bridging the gap between <strong class="text-violet-400">data</strong> and <strong class="text-pink-400">decision-making</strong>. Passionate about Business Analytics, HR Strategy & emerging technologies.
-      </p>
-    </div>
+            <div class="reveal" style="transition-delay:0.1s">
+                <p class="text-indigo-400 font-semibold tracking-widest uppercase text-sm mb-3">Welcome to my portfolio
+                </p>
+                <h1 class="text-5xl md:text-7xl font-black mb-4 leading-tight">
+                    Hi, I'm <span class="grad">Naman Vaja</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-300 mb-2">
+                    <span id="typewriter"></span><span class="cursor"></span>
+                </p>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+                    Bridging the gap between <strong class="text-violet-400">data</strong> and <strong
+                        class="text-pink-400">decision-making</strong>. Passionate about Business Analytics, HR Strategy
+                    & emerging technologies.
+                </p>
+            </div>
 
-    <div class="reveal mt-10 flex flex-wrap gap-4 justify-center" style="transition-delay:0.2s">
-      <a href="#contact" class="btn-glow px-8 py-3 rounded-full text-white font-semibold text-sm"><span>Get In Touch</span></a>
-      <a href="#certificates" class="border border-violet-500/50 px-8 py-3 rounded-full text-violet-300 font-semibold text-sm hover:bg-violet-500/10 transition">View Certificates</a>
-    </div>
+            <div class="reveal mt-10 flex flex-wrap gap-4 justify-center" style="transition-delay:0.2s">
+                <a href="#contact" class="btn-glow px-8 py-3 rounded-full text-white font-semibold text-sm"><span>Get In
+                        Touch</span></a>
+                <a href="#certificates"
+                    class="border border-violet-500/50 px-8 py-3 rounded-full text-violet-300 font-semibold text-sm hover:bg-violet-500/10 transition">View
+                    Certificates</a>
+            </div>
 
-    <!-- Stats -->
-    <div class="reveal mt-16 grid grid-cols-3 gap-6 max-w-md mx-auto" style="transition-delay:0.3s">
-      <div class="text-center">
-        <div class="stat-num" data-count="7">0</div>
-        <p class="text-xs text-slate-400 mt-1">Certificates</p>
-      </div>
-      <div class="text-center">
-        <div class="stat-num" data-count="3">0</div>
-        <p class="text-xs text-slate-400 mt-1">Internships</p>
-      </div>
-      <div class="text-center">
-        <div class="stat-num" data-count="4">0</div>
-        <p class="text-xs text-slate-400 mt-1">Projects</p>
-      </div>
-    </div>
-  </div>
+            <!-- Stats -->
+            <div class="reveal mt-16 grid grid-cols-3 gap-6 max-w-md mx-auto" style="transition-delay:0.3s">
+                <div class="text-center">
+                    <div class="stat-num" data-count="7">0</div>
+                    <p class="text-xs text-slate-400 mt-1">Certificates</p>
+                </div>
+                <div class="text-center">
+                    <div class="stat-num" data-count="3">0</div>
+                    <p class="text-xs text-slate-400 mt-1">Internships</p>
+                </div>
+                <div class="text-center">
+                    <div class="stat-num" data-count="4">0</div>
+                    <p class="text-xs text-slate-400 mt-1">Projects</p>
+                </div>
+            </div>
+        </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 text-xs animate-bounce">
-    <span>Scroll</span>
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-  </div>
-</section>
+        <!-- Scroll indicator -->
+        <div
+            class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 text-xs animate-bounce">
+            <span>Scroll</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </div>
+    </section>
 
-<!-- ABOUT -->
-<section id="about" class="section-alt py-24 px-6 relative z-10">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal text-center mb-16">
-      <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Who I Am</p>
-      <h2 class="text-4xl font-black">About <span class="grad">Me</span></h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div class="reveal-left">
-        <p class="text-slate-300 leading-relaxed mb-4">
-          I'm a first-year <strong class="text-violet-400">PGDM student at ISBR Business School, Bangalore</strong>, with dual specializations in <strong class="text-pink-400">Business Analytics</strong> and <strong class="text-pink-400">Human Resources</strong>.
+    <!-- ABOUT -->
+    <section id="about" class="section-alt py-24 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Who I Am</p>
+                <h2 class="text-4xl font-black">About <span class="grad">Me</span></h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal-left">
+                    <p class="text-slate-300 leading-relaxed mb-4">
+                        I'm a first-year <strong class="text-violet-400">PGDM student at ISBR Business School,
+                            Bangalore</strong>, with dual specializations in <strong class="text-pink-400">Business
+                            Analytics</strong> and <strong class="text-pink-400">Human Resources</strong>.
+                    </p>
+                    <p class="text-slate-300 leading-relaxed mb-4">
+                        My mission is to extract actionable insights from complex data sets while understanding the
+                        nuances of human capital management. I've gained industry exposure through an internship at
+                        <strong class="text-violet-400">Welspun</strong> in the HCGA department.
+                    </p>
+                    <p class="text-slate-300 leading-relaxed">
+                        I'm honing skills in SQL, Python, Excel, Tableau & Power BI — tools that let me tell compelling
+                        data stories and drive strategic decisions.
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <span
+                            class="px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium">📍
+                            Bengaluru, India</span>
+                        <span
+                            class="px-4 py-2 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-medium">📧
+                            namanvaja835@gmail.com</span>
+                        <span
+                            class="px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-medium">📞
+                            +91 8320591929</span>
+                    </div>
+                </div>
+                <div class="reveal-right grid grid-cols-2 gap-4">
+                    <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="text-3xl mb-2">📊</div>
+                        <h3 class="font-bold text-white mb-1">Data Analytics</h3>
+                        <p class="text-slate-400 text-xs">SQL · Python · Excel · Power BI</p>
+                    </div>
+                    <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="text-3xl mb-2">👥</div>
+                        <h3 class="font-bold text-white mb-1">HR Strategy</h3>
+                        <p class="text-slate-400 text-xs">Talent · Workforce Analytics</p>
+                    </div>
+                    <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="text-3xl mb-2">🤖</div>
+                        <h3 class="font-bold text-white mb-1">Generative AI</h3>
+                        <p class="text-slate-400 text-xs">Adobe · Chatbots · Prompting</p>
+                    </div>
+                    <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 text-center">
+                        <div class="text-3xl mb-2">📈</div>
+                        <h3 class="font-bold text-white mb-1">Marketing</h3>
+                        <p class="text-slate-400 text-xs">Google Ads · Market Research</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="py-24 px-6 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">What I Know</p>
+                <h2 class="text-4xl font-black">My <span class="grad">Skills</span></h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="reveal-left space-y-5">
+                    <h3 class="text-lg font-bold text-slate-200 mb-4">Technical Skills</h3>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Microsoft Excel
+                                (Advanced)</span><span class="text-violet-400">88%</span></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="88"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Data
+                                Analysis</span><span class="text-violet-400">82%</span></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="82"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">SQL</span><span
+                                class="text-violet-400">70%</span></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="70"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Python</span><span
+                                class="text-violet-400">65%</span></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="65"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Tableau / Power
+                                BI</span><span class="text-violet-400">72%</span></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="72"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-right space-y-5">
+                    <h3 class="text-lg font-bold text-slate-200 mb-4">Soft Skills & Tools</h3>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Communication &
+                                Leadership</span><span class="text-pink-400">90%</span></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Business
+                                Analysis</span><span class="text-pink-400">80%</span></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Canva / Design
+                                Tools</span><span class="text-pink-400">85%</span></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Generative AI
+                                Tools</span><span class="text-pink-400">78%</span></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="78"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Financial
+                                Analysis</span><span class="text-pink-400">75%</span></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-width="75"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Tags -->
+            <div class="reveal mt-12 flex flex-wrap gap-3 justify-center">
+                <span
+                    class="px-4 py-2 bg-violet-500/10 border border-violet-500/20 text-violet-300 rounded-full text-sm">Workforce
+                    Analytics</span>
+                <span
+                    class="px-4 py-2 bg-pink-500/10 border border-pink-500/20 text-pink-300 rounded-full text-sm">Talent
+                    Acquisition</span>
+                <span
+                    class="px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 rounded-full text-sm">Organizational
+                    Development</span>
+                <span
+                    class="px-4 py-2 bg-violet-500/10 border border-violet-500/20 text-violet-300 rounded-full text-sm">Business
+                    Intelligence</span>
+                <span
+                    class="px-4 py-2 bg-pink-500/10 border border-pink-500/20 text-pink-300 rounded-full text-sm">Strategic
+                    HR</span>
+                <span
+                    class="px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 rounded-full text-sm">Google
+                    Ads</span>
+                <span
+                    class="px-4 py-2 bg-violet-500/10 border border-violet-500/20 text-violet-300 rounded-full text-sm">AWS
+                    Architecture</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section-alt py-24 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Career Path</p>
+                <h2 class="text-4xl font-black">Work <span class="grad">Experience</span></h2>
+            </div>
+
+            <div class="relative timeline space-y-0">
+                <!-- Item 1 -->
+                <div class="reveal grid md:grid-cols-2 gap-6 mb-12 items-center">
+                    <div class="md:text-right md:pr-12">
+                        <span class="text-xs text-violet-400 font-semibold uppercase tracking-wide">Jul 2025 –
+                            Present</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Placement Ambassador</h3>
+                        <p class="text-slate-400 text-sm">ISBR Business School, Bangalore</p>
+                    </div>
+                    <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 md:ml-12 relative">
+                        <div
+                            class="absolute -left-3 top-6 w-6 h-6 rounded-full bg-gradient-to-br from-violet-600 to-pink-600 border-2 border-[#0f172a] hidden md:block">
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed">Coordinating with placement cell, ensuring
+                            discipline during recruitment drives, and acting as representative for the placement team,
+                            fostering a professional environment for students.</p>
+                        <div class="mt-3 flex gap-2 flex-wrap">
+                            <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">Student
+                                Relations</span>
+                            <span
+                                class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Coordination</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="reveal grid md:grid-cols-2 gap-6 mb-12 items-center">
+                    <div
+                        class="card bg-[#020817] border border-white/5 rounded-2xl p-6 md:mr-12 relative order-2 md:order-1">
+                        <div
+                            class="absolute -right-3 top-6 w-6 h-6 rounded-full bg-gradient-to-br from-pink-600 to-indigo-600 border-2 border-[#0f172a] hidden md:block">
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed">Gained insights into talent pipeline analysis,
+                            employee performance metrics, and organizational behavior mapping within the HCGA team at
+                            Welspun — a transformative industry exposure experience.</p>
+                        <div class="mt-3 flex gap-2 flex-wrap">
+                            <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">HR
+                                Analytics</span>
+                            <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Workforce
+                                Mgmt</span>
+                        </div>
+                    </div>
+                    <div class="md:text-left md:pl-12 order-1 md:order-2">
+                        <span class="text-xs text-pink-400 font-semibold uppercase tracking-wide">May – Jun 2025</span>
+                        <h3 class="text-xl font-bold text-white mt-1">HR Intern – HCGA</h3>
+                        <p class="text-slate-400 text-sm">Welspun World, Anjar, Gujarat</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="reveal grid md:grid-cols-2 gap-6 mb-12 items-center">
+                    <div class="md:text-right md:pr-12">
+                        <span class="text-xs text-violet-400 font-semibold uppercase tracking-wide">Jan – Jul
+                            2025</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Writer for Blind People</h3>
+                        <p class="text-slate-400 text-sm">One Vision for Writers NGO</p>
+                    </div>
+                    <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 md:ml-12">
+                        <p class="text-slate-300 text-sm leading-relaxed">Contributed as a writer supporting
+                            accessibility for visually impaired individuals through the NGO's mission of inclusive
+                            education and literature.</p>
+                        <div class="mt-3 flex gap-2 flex-wrap">
+                            <span
+                                class="px-3 py-1 bg-indigo-500/10 text-indigo-300 rounded-full text-xs">Accessibility</span>
+                            <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">NGO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="reveal grid md:grid-cols-2 gap-6 items-center">
+                    <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 md:mr-12 order-2 md:order-1">
+                        <p class="text-slate-300 text-sm leading-relaxed">Worked as a proactive team player with
+                            excellent communication skills, building strong interpersonal relationships and consistently
+                            contributing to team goals in marketing campaigns.</p>
+                        <div class="mt-3 flex gap-2 flex-wrap">
+                            <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Marketing</span>
+                            <span
+                                class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">Communication</span>
+                        </div>
+                    </div>
+                    <div class="md:text-left md:pl-12 order-1 md:order-2">
+                        <span class="text-xs text-pink-400 font-semibold uppercase tracking-wide">Jan – Feb 2024</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Marketing Intern</h3>
+                        <p class="text-slate-400 text-sm">IMS Ahmedabad</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="py-24 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Academic Journey</p>
+                <h2 class="text-4xl font-black">My <span class="grad">Education</span></h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="reveal card bg-[#0f172a] border border-violet-500/20 rounded-2xl p-6">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-pink-600 flex items-center justify-center text-xl font-black text-white flex-shrink-0">
+                            🎓</div>
+                        <div>
+                            <span class="text-xs text-violet-400 font-semibold uppercase">2025 – 2027</span>
+                            <h3 class="text-lg font-bold text-white mt-1">PGDM – Data Science & Business Analytics</h3>
+                            <p class="text-slate-400 text-sm">ISBR Business School, Bangalore</p>
+                            <p class="text-slate-500 text-xs mt-1">Dual specialization: Business Analytics + Human
+                                Resources</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal card bg-[#0f172a] border border-pink-500/20 rounded-2xl p-6"
+                    style="transition-delay:0.1s">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-600 to-indigo-600 flex items-center justify-center text-xl font-black text-white flex-shrink-0">
+                            📚</div>
+                        <div>
+                            <span class="text-xs text-pink-400 font-semibold uppercase">2022 – 2025</span>
+                            <h3 class="text-lg font-bold text-white mt-1">BBA – Marketing</h3>
+                            <p class="text-slate-400 text-sm">K.S. School of Business Management</p>
+                            <p class="text-slate-500 text-xs mt-1">CGPA: 3.24 / 5.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal card bg-[#0f172a] border border-indigo-500/20 rounded-2xl p-6"
+                    style="transition-delay:0.2s">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-xl font-black text-white flex-shrink-0">
+                            🏫</div>
+                        <div>
+                            <span class="text-xs text-indigo-400 font-semibold uppercase">2021 – 2022</span>
+                            <h3 class="text-lg font-bold text-white mt-1">Class XII – CBSE</h3>
+                            <p class="text-slate-400 text-sm">Welspun Vidya Mandir, Anjar</p>
+                            <p class="text-slate-500 text-xs mt-1">71.8%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal card bg-[#0f172a] border border-violet-500/20 rounded-2xl p-6"
+                    style="transition-delay:0.3s">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-xl font-black text-white flex-shrink-0">
+                            🏫</div>
+                        <div>
+                            <span class="text-xs text-violet-400 font-semibold uppercase">2019 – 2020</span>
+                            <h3 class="text-lg font-bold text-white mt-1">Class X – CBSE</h3>
+                            <p class="text-slate-400 text-sm">Welspun Vidya Mandir, Anjar</p>
+                            <p class="text-slate-500 text-xs mt-1">68.4%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section-alt py-24 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">What I've Built</p>
+                <h2 class="text-4xl font-black">My <span class="grad">Projects</span></h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="reveal card bg-[#020817] border border-white/5 rounded-2xl p-6 group">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">
+                        🚕</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Feasibility Study – Cab Service</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Comprehensive feasibility analysis for launching a
+                        cab service, covering market demand, operational costs, revenue projections and competitive
+                        landscape.</p>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">Market
+                            Research</span>
+                        <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Financial
+                            Modeling</span>
+                    </div>
+                </div>
+                <div class="reveal card bg-[#020817] border border-white/5 rounded-2xl p-6 group"
+                    style="transition-delay:0.1s">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">
+                        📊</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Market Research Project</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">In-depth market research project analyzing
+                        consumer behavior, segmentation, and strategic positioning for a target market.</p>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Consumer
+                            Behavior</span>
+                        <span class="px-3 py-1 bg-indigo-500/10 text-indigo-300 rounded-full text-xs">Data
+                            Analysis</span>
+                    </div>
+                </div>
+                <div class="reveal card bg-[#020817] border border-white/5 rounded-2xl p-6 group"
+                    style="transition-delay:0.2s">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">
+                        🎯</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Marketing Mix Elements</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Detailed analysis of the 4Ps of marketing applied
+                        to a real-world scenario, with strategic recommendations for product positioning and pricing.
+                    </p>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 bg-indigo-500/10 text-indigo-300 rounded-full text-xs">4P Analysis</span>
+                        <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">Strategy</span>
+                    </div>
+                </div>
+                <div class="reveal card bg-[#020817] border border-white/5 rounded-2xl p-6 group"
+                    style="transition-delay:0.3s">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">
+                        ⚙️</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Production & Operations</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Studied production planning, operations management
+                        methodologies, and process optimization frameworks for organizational efficiency.</p>
+                    <div class="mt-4 flex gap-2">
+                        <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">Operations</span>
+                        <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Process Mgmt</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates" class="py-24 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Credentials</p>
+                <h2 class="text-4xl font-black">My <span class="grad">Certificates</span></h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div class="reveal flip-card">
+                    <div
+                        class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-violet-500/20 rounded-2xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-2xl">🎨</span>
+                            <span class="text-xs font-bold text-violet-400 uppercase tracking-wide">Coursera ×
+                                Adobe</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1">Generative AI Content Creation</h3>
+                        <p class="text-slate-400 text-xs mb-4">Authorized by Adobe · Nov 2, 2025</p>
+                        <a href="https://coursera.org/verify/3UAY8AAMDI44" target="_blank"
+                            class="inline-flex items-center gap-1 text-violet-400 text-xs hover:text-violet-300 transition">Verify
+                            ↗</a>
+                    </div>
+                </div>
+
+                <div class="reveal flip-card" style="transition-delay:0.1s">
+                    <div
+                        class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-pink-500/20 rounded-2xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-2xl">🎨</span>
+                            <span class="text-xs font-bold text-pink-400 uppercase tracking-wide">Coursera ×
+                                Adobe</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1">Design Fundamentals with AI</h3>
+                        <p class="text-slate-400 text-xs mb-4">Authorized by Adobe · Nov 2, 2025</p>
+                        <a href="https://coursera.org/verify/ZZBYVKPAGRLS" target="_blank"
+                            class="inline-flex items-center gap-1 text-pink-400 text-xs hover:text-pink-300 transition">Verify
+                            ↗</a>
+                    </div>
+                </div>
+
+                <div class="reveal flip-card" style="transition-delay:0.15s">
+                    <div
+                        class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-indigo-500/20 rounded-2xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-2xl">📊</span>
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-wide">Coursera
+                                Project</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1">Introduction to Data Analysis using Microsoft
+                            Excel</h3>
+                        <p class="text-slate-400 text-xs mb-4">Freedom Learning Group · Jan 17, 2025</p>
+                        <a href="https://coursera.org/verify/0MZ5PL05WS30" target="_blank"
+                            class="inline-flex items-center gap-1 text-indigo-400 text-xs hover:text-indigo-300 transition">Verify
+                            ↗</a>
+                    </div>
+                </div>
+
+                <div class="reveal flip-card" style="transition-delay:0.2s">
+                    <div
+                        class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-violet-500/20 rounded-2xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-2xl">📋</span>
+                            <span class="text-xs font-bold text-violet-400 uppercase tracking-wide">Coursera
+                                Project</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1">Business Analysis & Process Management</h3>
+                        <p class="text-slate-400 text-xs mb-4">Mahi Ismail · Jan 17, 2025</p>
+                        <a href="https://coursera.org/verify/VJ4DWA9FU5R3" target="_blank"
+                            class="inline-flex items-center gap-1 text-violet-400 text-xs hover:text-violet-300 transition">Verify
+                            ↗</a>
+                    </div>
+                </div>
+
+                <div class="reveal flip-card" style="transition-delay:0.25s">
+                    <div
+                        class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-pink-500/20 rounded-2xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-2xl">☁️</span>
+                            <span class="text-xs font-bold text-pink-400 uppercase tracking-wide">Forage</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1">AWS Solutions Architecture Job Simulation</h3>
+                        <p class="text-slate-400 text-xs mb-4">Issued by Forage · Aug 20, 2025</p>
+                        <span class="text-slate-500 text-xs">Code: 22FbewpqEb7gTPCSa</span>
+                    </div>
+                </div>
+
+                <div class="reveal flip-card" style="transition-delay:0.3s">
+                    <div
+                        class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-indigo-500/20 rounded-2xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-2xl">🤖</span>
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-wide">ISBR Business
+                                School</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1">Orientation on Generative AI</h3>
+                        <p class="text-slate-400 text-xs mb-4">Workshop · Mar 28, 2025</p>
+                        <span class="text-slate-500 text-xs">Module 1 & 2 · Fundamentals + Business Apps</span>
+                    </div>
+                </div>
+
+                <div class="reveal flip-card" style="transition-delay:0.35s">
+                    <div
+                        class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-violet-500/20 rounded-2xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-2xl">💡</span>
+                            <span class="text-xs font-bold text-violet-400 uppercase tracking-wide">ISBR Business
+                                School</span>
+                        </div>
+                        <h3 class="text-base font-bold text-white mb-1">Leveraging AI Tools for Academic & Professional
+                            Excellence</h3>
+                        <p class="text-slate-400 text-xs mb-4">Workshop · Apr 11, 2025 · 6 Modules</p>
+                        <span class="text-slate-500 text-xs">ChatGPT · Chatbots · Career Tools</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- VOLUNTEER -->
+    <section id="volunteer" class="section-alt py-24 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Giving Back</p>
+                <h2 class="text-4xl font-black">Volunteer <span class="grad">Work</span></h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="reveal card bg-[#020817] border border-violet-500/20 rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-4">💻</div>
+                    <h3 class="font-bold text-white mb-2">Bengaluru Tech Summit 2025</h3>
+                    <p class="text-slate-400 text-sm">Presented ideas and solutions, networked with tech & business
+                        professionals, gained insights into emerging tech trends.</p>
+                </div>
+                <div class="reveal card bg-[#020817] border border-pink-500/20 rounded-2xl p-6 text-center"
+                    style="transition-delay:0.1s">
+                    <div class="text-4xl mb-4">❤️</div>
+                    <h3 class="font-bold text-white mb-2">Philips Heart Health</h3>
+                    <p class="text-slate-400 text-sm">Spread awareness about heart health to organisations, promoting
+                        the importance of maintaining cardiovascular wellness.</p>
+                </div>
+                <div class="reveal card bg-[#020817] border border-indigo-500/20 rounded-2xl p-6 text-center"
+                    style="transition-delay:0.2s">
+                    <div class="text-4xl mb-4">♿</div>
+                    <h3 class="font-bold text-white mb-2">Samarth by Hyundai</h3>
+                    <p class="text-slate-400 text-sm">Assisted in organizing awareness drives promoting inclusivity and
+                        accessibility for persons with disabilities, coordinating with Hyundai representatives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POSITIONS OF RESPONSIBILITY -->
+    <section class="py-24 px-6 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="reveal text-center mb-16">
+                <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Leadership</p>
+                <h2 class="text-4xl font-black">Positions of <span class="grad">Responsibility</span></h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="reveal card bg-[#0f172a] border border-violet-500/20 rounded-2xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center text-lg">
+                            🎖️</div>
+                        <div>
+                            <h3 class="font-bold text-white">Placement Ambassador</h3>
+                            <p class="text-violet-400 text-xs">ISBR Business School · Jul 2025–Present</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm">Coordinating with the placement cell, ensuring discipline during
+                        recruitment drives, and acting as a bridge between students and recruiters.</p>
+                </div>
+                <div class="reveal card bg-[#0f172a] border border-pink-500/20 rounded-2xl p-6"
+                    style="transition-delay:0.1s">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center text-lg">📣
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white">Campus Ambassador</h3>
+                            <p class="text-pink-400 text-xs">Driving student participation</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm">Driving student participation by encouraging sign-ups and
+                        awareness, building a strong peer network and maintaining brand visibility within college.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section-alt py-24 px-6 relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="reveal mb-12">
+                <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Let's Connect</p>
+                <h2 class="text-4xl font-black mb-4">Get In <span class="grad">Touch</span></h2>
+                <p class="text-slate-400">I'm actively seeking internships and collaborations in business analytics, HR
+                    tech, and data-driven consulting. Let's talk!</p>
+            </div>
+            <div class="reveal grid sm:grid-cols-3 gap-6 mb-10">
+                <a href="mailto:namanvaja835@gmail.com"
+                    class="card bg-[#020817] border border-violet-500/20 rounded-2xl p-6 group block">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition">📧</div>
+                    <p class="text-xs text-slate-400 mb-1">Email</p>
+                    <p class="text-white text-sm font-medium break-all">namanvaja835@gmail.com</p>
+                </a>
+                <a href="tel:+918320591929"
+                    class="card bg-[#020817] border border-pink-500/20 rounded-2xl p-6 group block">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition">📞</div>
+                    <p class="text-xs text-slate-400 mb-1">Phone</p>
+                    <p class="text-white text-sm font-medium">+91 8320591929</p>
+                </a>
+                <a href="https://www.linkedin.com/in/naman-vaja-99472529a" target="_blank"
+                    class="card bg-[#020817] border border-indigo-500/20 rounded-2xl p-6 group block">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition">🔗</div>
+                    <p class="text-xs text-slate-400 mb-1">LinkedIn</p>
+                    <p class="text-white text-sm font-medium">naman-vaja-99472529a</p>
+                </a>
+            </div>
+
+            <div class="reveal">
+                <form onsubmit="handleSubmit(event)"
+                    class="bg-[#020817] border border-white/5 rounded-2xl p-8 text-left">
+                    <div class="grid sm:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="text-xs text-slate-400 mb-1 block">Your Name</label>
+                            <input type="text" placeholder="John Doe"
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition" />
+                        </div>
+                        <div>
+                            <label class="text-xs text-slate-400 mb-1 block">Your Email</label>
+                            <input type="email" placeholder="john@example.com"
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition" />
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="text-xs text-slate-400 mb-1 block">Message</label>
+                        <textarea rows="4" placeholder="I'd love to connect about..."
+                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition resize-none"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="btn-glow w-full py-3 rounded-xl text-white font-semibold text-sm"><span>Send Message
+                            ✈️</span></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 px-6 border-t border-white/5 text-center relative z-10">
+        <p class="text-slate-500 text-sm">Designed & Built with ❤️ · <span class="grad font-semibold">Naman Vaja</span>
+            © 2025</p>
+        <p class="text-slate-600 text-xs mt-1">PGDM Student · Business Analytics & HR · ISBR Business School, Bangalore
         </p>
-        <p class="text-slate-300 leading-relaxed mb-4">
-          My mission is to extract actionable insights from complex data sets while understanding the nuances of human capital management. I've gained industry exposure through an internship at <strong class="text-violet-400">Welspun</strong> in the HCGA department.
-        </p>
-        <p class="text-slate-300 leading-relaxed">
-          I'm honing skills in SQL, Python, Excel, Tableau & Power BI — tools that let me tell compelling data stories and drive strategic decisions.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <span class="px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium">📍 Bengaluru, India</span>
-          <span class="px-4 py-2 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-300 text-xs font-medium">📧 namanvaja835@gmail.com</span>
-          <span class="px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-medium">📞 +91 8320591929</span>
-        </div>
-      </div>
-      <div class="reveal-right grid grid-cols-2 gap-4">
-        <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 text-center">
-          <div class="text-3xl mb-2">📊</div>
-          <h3 class="font-bold text-white mb-1">Data Analytics</h3>
-          <p class="text-slate-400 text-xs">SQL · Python · Excel · Power BI</p>
-        </div>
-        <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 text-center">
-          <div class="text-3xl mb-2">👥</div>
-          <h3 class="font-bold text-white mb-1">HR Strategy</h3>
-          <p class="text-slate-400 text-xs">Talent · Workforce Analytics</p>
-        </div>
-        <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 text-center">
-          <div class="text-3xl mb-2">🤖</div>
-          <h3 class="font-bold text-white mb-1">Generative AI</h3>
-          <p class="text-slate-400 text-xs">Adobe · Chatbots · Prompting</p>
-        </div>
-        <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 text-center">
-          <div class="text-3xl mb-2">📈</div>
-          <h3 class="font-bold text-white mb-1">Marketing</h3>
-          <p class="text-slate-400 text-xs">Google Ads · Market Research</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </footer>
 
-<!-- SKILLS -->
-<section id="skills" class="py-24 px-6 relative z-10">
-  <div class="max-w-4xl mx-auto">
-    <div class="reveal text-center mb-16">
-      <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">What I Know</p>
-      <h2 class="text-4xl font-black">My <span class="grad">Skills</span></h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="reveal-left space-y-5">
-        <h3 class="text-lg font-bold text-slate-200 mb-4">Technical Skills</h3>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Microsoft Excel (Advanced)</span><span class="text-violet-400">88%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Data Analysis</span><span class="text-violet-400">82%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">SQL</span><span class="text-violet-400">70%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Python</span><span class="text-violet-400">65%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="65"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Tableau / Power BI</span><span class="text-violet-400">72%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
-        </div>
-      </div>
-      <div class="reveal-right space-y-5">
-        <h3 class="text-lg font-bold text-slate-200 mb-4">Soft Skills & Tools</h3>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Communication & Leadership</span><span class="text-pink-400">90%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Business Analysis</span><span class="text-pink-400">80%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Canva / Design Tools</span><span class="text-pink-400">85%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Generative AI Tools</span><span class="text-pink-400">78%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between text-sm mb-2"><span class="text-slate-300">Financial Analysis</span><span class="text-pink-400">75%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-        </div>
-      </div>
-    </div>
-    <!-- Tags -->
-    <div class="reveal mt-12 flex flex-wrap gap-3 justify-center">
-      <span class="px-4 py-2 bg-violet-500/10 border border-violet-500/20 text-violet-300 rounded-full text-sm">Workforce Analytics</span>
-      <span class="px-4 py-2 bg-pink-500/10 border border-pink-500/20 text-pink-300 rounded-full text-sm">Talent Acquisition</span>
-      <span class="px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 rounded-full text-sm">Organizational Development</span>
-      <span class="px-4 py-2 bg-violet-500/10 border border-violet-500/20 text-violet-300 rounded-full text-sm">Business Intelligence</span>
-      <span class="px-4 py-2 bg-pink-500/10 border border-pink-500/20 text-pink-300 rounded-full text-sm">Strategic HR</span>
-      <span class="px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 rounded-full text-sm">Google Ads</span>
-      <span class="px-4 py-2 bg-violet-500/10 border border-violet-500/20 text-violet-300 rounded-full text-sm">AWS Architecture</span>
-    </div>
-  </div>
-</section>
+    <!-- SCRIPTS -->
+    <script>
+        // === PARTICLES ===
+        (function () {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            let W, H, particles = [];
+            function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+            resize(); window.addEventListener('resize', resize);
 
-<!-- EXPERIENCE -->
-<section id="experience" class="section-alt py-24 px-6 relative z-10">
-  <div class="max-w-5xl mx-auto">
-    <div class="reveal text-center mb-16">
-      <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Career Path</p>
-      <h2 class="text-4xl font-black">Work <span class="grad">Experience</span></h2>
-    </div>
+            for (let i = 0; i < 60; i++) {
+                particles.push({
+                    x: Math.random() * 1920, y: Math.random() * 1080,
+                    vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+                    r: Math.random() * 2 + 0.5,
+                    a: Math.random()
+                });
+            }
 
-    <div class="relative timeline space-y-0">
-      <!-- Item 1 -->
-      <div class="reveal grid md:grid-cols-2 gap-6 mb-12 items-center">
-        <div class="md:text-right md:pr-12">
-          <span class="text-xs text-violet-400 font-semibold uppercase tracking-wide">Jul 2025 – Present</span>
-          <h3 class="text-xl font-bold text-white mt-1">Placement Ambassador</h3>
-          <p class="text-slate-400 text-sm">ISBR Business School, Bangalore</p>
-        </div>
-        <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 md:ml-12 relative">
-          <div class="absolute -left-3 top-6 w-6 h-6 rounded-full bg-gradient-to-br from-violet-600 to-pink-600 border-2 border-[#0f172a] hidden md:block"></div>
-          <p class="text-slate-300 text-sm leading-relaxed">Coordinating with placement cell, ensuring discipline during recruitment drives, and acting as representative for the placement team, fostering a professional environment for students.</p>
-          <div class="mt-3 flex gap-2 flex-wrap">
-            <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">Student Relations</span>
-            <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Coordination</span>
-          </div>
-        </div>
-      </div>
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                particles.forEach(p => {
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+                    if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(99,102,241,${p.a * 0.5})`;
+                    ctx.fill();
+                });
+                // Lines
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(99,102,241,${(1 - dist / 120) * 0.12})`;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
 
-      <!-- Item 2 -->
-      <div class="reveal grid md:grid-cols-2 gap-6 mb-12 items-center">
-        <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 md:mr-12 relative order-2 md:order-1">
-          <div class="absolute -right-3 top-6 w-6 h-6 rounded-full bg-gradient-to-br from-pink-600 to-indigo-600 border-2 border-[#0f172a] hidden md:block"></div>
-          <p class="text-slate-300 text-sm leading-relaxed">Gained insights into talent pipeline analysis, employee performance metrics, and organizational behavior mapping within the HCGA team at Welspun — a transformative industry exposure experience.</p>
-          <div class="mt-3 flex gap-2 flex-wrap">
-            <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">HR Analytics</span>
-            <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Workforce Mgmt</span>
-          </div>
-        </div>
-        <div class="md:text-left md:pl-12 order-1 md:order-2">
-          <span class="text-xs text-pink-400 font-semibold uppercase tracking-wide">May – Jun 2025</span>
-          <h3 class="text-xl font-bold text-white mt-1">HR Intern – HCGA</h3>
-          <p class="text-slate-400 text-sm">Welspun World, Anjar, Gujarat</p>
-        </div>
-      </div>
+        // === TYPEWRITER ===
+        (function () {
+            const texts = [
+                'PGDM Student @ ISBR Bangalore',
+                'Business Analytics Enthusiast',
+                'HR & Data Strategy Explorer',
+                'Placement Ambassador',
+                'Generative AI Learner',
+            ];
+            let ti = 0, ci = 0, deleting = false;
+            const el = document.getElementById('typewriter');
+            function type() {
+                const current = texts[ti];
+                if (!deleting) {
+                    el.textContent = current.slice(0, ci++);
+                    if (ci > current.length) { deleting = true; setTimeout(type, 1800); return; }
+                } else {
+                    el.textContent = current.slice(0, ci--);
+                    if (ci < 0) { deleting = false; ti = (ti + 1) % texts.length; setTimeout(type, 400); return; }
+                }
+                setTimeout(type, deleting ? 50 : 80);
+            }
+            type();
+        })();
 
-      <!-- Item 3 -->
-      <div class="reveal grid md:grid-cols-2 gap-6 mb-12 items-center">
-        <div class="md:text-right md:pr-12">
-          <span class="text-xs text-violet-400 font-semibold uppercase tracking-wide">Jan – Jul 2025</span>
-          <h3 class="text-xl font-bold text-white mt-1">Writer for Blind People</h3>
-          <p class="text-slate-400 text-sm">One Vision for Writers NGO</p>
-        </div>
-        <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 md:ml-12">
-          <p class="text-slate-300 text-sm leading-relaxed">Contributed as a writer supporting accessibility for visually impaired individuals through the NGO's mission of inclusive education and literature.</p>
-          <div class="mt-3 flex gap-2 flex-wrap">
-            <span class="px-3 py-1 bg-indigo-500/10 text-indigo-300 rounded-full text-xs">Accessibility</span>
-            <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">NGO</span>
-          </div>
-        </div>
-      </div>
+        // === SCROLL REVEAL ===
+        (function () {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => obs.observe(el));
+        })();
 
-      <!-- Item 4 -->
-      <div class="reveal grid md:grid-cols-2 gap-6 items-center">
-        <div class="card bg-[#020817] border border-white/5 rounded-2xl p-6 md:mr-12 order-2 md:order-1">
-          <p class="text-slate-300 text-sm leading-relaxed">Worked as a proactive team player with excellent communication skills, building strong interpersonal relationships and consistently contributing to team goals in marketing campaigns.</p>
-          <div class="mt-3 flex gap-2 flex-wrap">
-            <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Marketing</span>
-            <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">Communication</span>
-          </div>
-        </div>
-        <div class="md:text-left md:pl-12 order-1 md:order-2">
-          <span class="text-xs text-pink-400 font-semibold uppercase tracking-wide">Jan – Feb 2024</span>
-          <h3 class="text-xl font-bold text-white mt-1">Marketing Intern</h3>
-          <p class="text-slate-400 text-sm">IMS Ahmedabad</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        // === SKILL BARS ===
+        (function () {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.querySelectorAll('.skill-fill').forEach(bar => {
+                            bar.style.width = bar.dataset.width + '%';
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+            const section = document.getElementById('skills');
+            if (section) obs.observe(section);
+        })();
 
-<!-- EDUCATION -->
-<section id="education" class="py-24 px-6 relative z-10">
-  <div class="max-w-5xl mx-auto">
-    <div class="reveal text-center mb-16">
-      <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Academic Journey</p>
-      <h2 class="text-4xl font-black">My <span class="grad">Education</span></h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="reveal card bg-[#0f172a] border border-violet-500/20 rounded-2xl p-6">
-        <div class="flex items-start gap-4">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-pink-600 flex items-center justify-center text-xl font-black text-white flex-shrink-0">🎓</div>
-          <div>
-            <span class="text-xs text-violet-400 font-semibold uppercase">2025 – 2027</span>
-            <h3 class="text-lg font-bold text-white mt-1">PGDM – Data Science & Business Analytics</h3>
-            <p class="text-slate-400 text-sm">ISBR Business School, Bangalore</p>
-            <p class="text-slate-500 text-xs mt-1">Dual specialization: Business Analytics + Human Resources</p>
-          </div>
-        </div>
-      </div>
-      <div class="reveal card bg-[#0f172a] border border-pink-500/20 rounded-2xl p-6" style="transition-delay:0.1s">
-        <div class="flex items-start gap-4">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-600 to-indigo-600 flex items-center justify-center text-xl font-black text-white flex-shrink-0">📚</div>
-          <div>
-            <span class="text-xs text-pink-400 font-semibold uppercase">2022 – 2025</span>
-            <h3 class="text-lg font-bold text-white mt-1">BBA – Marketing</h3>
-            <p class="text-slate-400 text-sm">K.S. School of Business Management</p>
-            <p class="text-slate-500 text-xs mt-1">CGPA: 3.24 / 5.00</p>
-          </div>
-        </div>
-      </div>
-      <div class="reveal card bg-[#0f172a] border border-indigo-500/20 rounded-2xl p-6" style="transition-delay:0.2s">
-        <div class="flex items-start gap-4">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-xl font-black text-white flex-shrink-0">🏫</div>
-          <div>
-            <span class="text-xs text-indigo-400 font-semibold uppercase">2021 – 2022</span>
-            <h3 class="text-lg font-bold text-white mt-1">Class XII – CBSE</h3>
-            <p class="text-slate-400 text-sm">Welspun Vidya Mandir, Anjar</p>
-            <p class="text-slate-500 text-xs mt-1">71.8%</p>
-          </div>
-        </div>
-      </div>
-      <div class="reveal card bg-[#0f172a] border border-violet-500/20 rounded-2xl p-6" style="transition-delay:0.3s">
-        <div class="flex items-start gap-4">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-xl font-black text-white flex-shrink-0">🏫</div>
-          <div>
-            <span class="text-xs text-violet-400 font-semibold uppercase">2019 – 2020</span>
-            <h3 class="text-lg font-bold text-white mt-1">Class X – CBSE</h3>
-            <p class="text-slate-400 text-sm">Welspun Vidya Mandir, Anjar</p>
-            <p class="text-slate-500 text-xs mt-1">68.4%</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        // === COUNTER ANIMATION ===
+        (function () {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.querySelectorAll('[data-count]').forEach(el => {
+                            const target = parseInt(el.dataset.count);
+                            let cur = 0;
+                            const interval = setInterval(() => {
+                                cur++;
+                                el.textContent = cur;
+                                if (cur >= target) clearInterval(interval);
+                            }, 120);
+                        });
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            const hero = document.getElementById('hero');
+            if (hero) obs.observe(hero);
+        })();
 
-<!-- PROJECTS -->
-<section id="projects" class="section-alt py-24 px-6 relative z-10">
-  <div class="max-w-5xl mx-auto">
-    <div class="reveal text-center mb-16">
-      <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">What I've Built</p>
-      <h2 class="text-4xl font-black">My <span class="grad">Projects</span></h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="reveal card bg-[#020817] border border-white/5 rounded-2xl p-6 group">
-        <div class="w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">🚕</div>
-        <h3 class="text-lg font-bold text-white mb-2">Feasibility Study – Cab Service</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">Comprehensive feasibility analysis for launching a cab service, covering market demand, operational costs, revenue projections and competitive landscape.</p>
-        <div class="mt-4 flex gap-2">
-          <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">Market Research</span>
-          <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Financial Modeling</span>
-        </div>
-      </div>
-      <div class="reveal card bg-[#020817] border border-white/5 rounded-2xl p-6 group" style="transition-delay:0.1s">
-        <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">📊</div>
-        <h3 class="text-lg font-bold text-white mb-2">Market Research Project</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">In-depth market research project analyzing consumer behavior, segmentation, and strategic positioning for a target market.</p>
-        <div class="mt-4 flex gap-2">
-          <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Consumer Behavior</span>
-          <span class="px-3 py-1 bg-indigo-500/10 text-indigo-300 rounded-full text-xs">Data Analysis</span>
-        </div>
-      </div>
-      <div class="reveal card bg-[#020817] border border-white/5 rounded-2xl p-6 group" style="transition-delay:0.2s">
-        <div class="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">🎯</div>
-        <h3 class="text-lg font-bold text-white mb-2">Marketing Mix Elements</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">Detailed analysis of the 4Ps of marketing applied to a real-world scenario, with strategic recommendations for product positioning and pricing.</p>
-        <div class="mt-4 flex gap-2">
-          <span class="px-3 py-1 bg-indigo-500/10 text-indigo-300 rounded-full text-xs">4P Analysis</span>
-          <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">Strategy</span>
-        </div>
-      </div>
-      <div class="reveal card bg-[#020817] border border-white/5 rounded-2xl p-6 group" style="transition-delay:0.3s">
-        <div class="w-10 h-10 rounded-lg bg-violet-500/20 flex items-center justify-center mb-4 text-xl group-hover:scale-110 transition">⚙️</div>
-        <h3 class="text-lg font-bold text-white mb-2">Production & Operations</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">Studied production planning, operations management methodologies, and process optimization frameworks for organizational efficiency.</p>
-        <div class="mt-4 flex gap-2">
-          <span class="px-3 py-1 bg-violet-500/10 text-violet-300 rounded-full text-xs">Operations</span>
-          <span class="px-3 py-1 bg-pink-500/10 text-pink-300 rounded-full text-xs">Process Mgmt</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CERTIFICATES -->
-<section id="certificates" class="py-24 px-6 relative z-10">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal text-center mb-16">
-      <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Credentials</p>
-      <h2 class="text-4xl font-black">My <span class="grad">Certificates</span></h2>
-    </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <div class="reveal flip-card">
-        <div class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-violet-500/20 rounded-2xl p-6">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-2xl">🎨</span>
-            <span class="text-xs font-bold text-violet-400 uppercase tracking-wide">Coursera × Adobe</span>
-          </div>
-          <h3 class="text-base font-bold text-white mb-1">Generative AI Content Creation</h3>
-          <p class="text-slate-400 text-xs mb-4">Authorized by Adobe · Nov 2, 2025</p>
-          <a href="https://coursera.org/verify/3UAY8AAMDI44" target="_blank" class="inline-flex items-center gap-1 text-violet-400 text-xs hover:text-violet-300 transition">Verify ↗</a>
-        </div>
-      </div>
-
-      <div class="reveal flip-card" style="transition-delay:0.1s">
-        <div class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-pink-500/20 rounded-2xl p-6">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-2xl">🎨</span>
-            <span class="text-xs font-bold text-pink-400 uppercase tracking-wide">Coursera × Adobe</span>
-          </div>
-          <h3 class="text-base font-bold text-white mb-1">Design Fundamentals with AI</h3>
-          <p class="text-slate-400 text-xs mb-4">Authorized by Adobe · Nov 2, 2025</p>
-          <a href="https://coursera.org/verify/ZZBYVKPAGRLS" target="_blank" class="inline-flex items-center gap-1 text-pink-400 text-xs hover:text-pink-300 transition">Verify ↗</a>
-        </div>
-      </div>
-
-      <div class="reveal flip-card" style="transition-delay:0.15s">
-        <div class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-indigo-500/20 rounded-2xl p-6">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-2xl">📊</span>
-            <span class="text-xs font-bold text-indigo-400 uppercase tracking-wide">Coursera Project</span>
-          </div>
-          <h3 class="text-base font-bold text-white mb-1">Introduction to Data Analysis using Microsoft Excel</h3>
-          <p class="text-slate-400 text-xs mb-4">Freedom Learning Group · Jan 17, 2025</p>
-          <a href="https://coursera.org/verify/0MZ5PL05WS30" target="_blank" class="inline-flex items-center gap-1 text-indigo-400 text-xs hover:text-indigo-300 transition">Verify ↗</a>
-        </div>
-      </div>
-
-      <div class="reveal flip-card" style="transition-delay:0.2s">
-        <div class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-violet-500/20 rounded-2xl p-6">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-2xl">📋</span>
-            <span class="text-xs font-bold text-violet-400 uppercase tracking-wide">Coursera Project</span>
-          </div>
-          <h3 class="text-base font-bold text-white mb-1">Business Analysis & Process Management</h3>
-          <p class="text-slate-400 text-xs mb-4">Mahi Ismail · Jan 17, 2025</p>
-          <a href="https://coursera.org/verify/VJ4DWA9FU5R3" target="_blank" class="inline-flex items-center gap-1 text-violet-400 text-xs hover:text-violet-300 transition">Verify ↗</a>
-        </div>
-      </div>
-
-      <div class="reveal flip-card" style="transition-delay:0.25s">
-        <div class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-pink-500/20 rounded-2xl p-6">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-2xl">☁️</span>
-            <span class="text-xs font-bold text-pink-400 uppercase tracking-wide">Forage</span>
-          </div>
-          <h3 class="text-base font-bold text-white mb-1">AWS Solutions Architecture Job Simulation</h3>
-          <p class="text-slate-400 text-xs mb-4">Issued by Forage · Aug 20, 2025</p>
-          <span class="text-slate-500 text-xs">Code: 22FbewpqEb7gTPCSa</span>
-        </div>
-      </div>
-
-      <div class="reveal flip-card" style="transition-delay:0.3s">
-        <div class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-indigo-500/20 rounded-2xl p-6">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-2xl">🤖</span>
-            <span class="text-xs font-bold text-indigo-400 uppercase tracking-wide">ISBR Business School</span>
-          </div>
-          <h3 class="text-base font-bold text-white mb-1">Orientation on Generative AI</h3>
-          <p class="text-slate-400 text-xs mb-4">Workshop · Mar 28, 2025</p>
-          <span class="text-slate-500 text-xs">Module 1 & 2 · Fundamentals + Business Apps</span>
-        </div>
-      </div>
-
-      <div class="reveal flip-card" style="transition-delay:0.35s">
-        <div class="flip-inner card bg-gradient-to-br from-[#1e1b4b] to-[#0f172a] border border-violet-500/20 rounded-2xl p-6">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-2xl">💡</span>
-            <span class="text-xs font-bold text-violet-400 uppercase tracking-wide">ISBR Business School</span>
-          </div>
-          <h3 class="text-base font-bold text-white mb-1">Leveraging AI Tools for Academic & Professional Excellence</h3>
-          <p class="text-slate-400 text-xs mb-4">Workshop · Apr 11, 2025 · 6 Modules</p>
-          <span class="text-slate-500 text-xs">ChatGPT · Chatbots · Career Tools</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- VOLUNTEER -->
-<section id="volunteer" class="section-alt py-24 px-6 relative z-10">
-  <div class="max-w-5xl mx-auto">
-    <div class="reveal text-center mb-16">
-      <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Giving Back</p>
-      <h2 class="text-4xl font-black">Volunteer <span class="grad">Work</span></h2>
-    </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="reveal card bg-[#020817] border border-violet-500/20 rounded-2xl p-6 text-center">
-        <div class="text-4xl mb-4">💻</div>
-        <h3 class="font-bold text-white mb-2">Bengaluru Tech Summit 2025</h3>
-        <p class="text-slate-400 text-sm">Presented ideas and solutions, networked with tech & business professionals, gained insights into emerging tech trends.</p>
-      </div>
-      <div class="reveal card bg-[#020817] border border-pink-500/20 rounded-2xl p-6 text-center" style="transition-delay:0.1s">
-        <div class="text-4xl mb-4">❤️</div>
-        <h3 class="font-bold text-white mb-2">Philips Heart Health</h3>
-        <p class="text-slate-400 text-sm">Spread awareness about heart health to organisations, promoting the importance of maintaining cardiovascular wellness.</p>
-      </div>
-      <div class="reveal card bg-[#020817] border border-indigo-500/20 rounded-2xl p-6 text-center" style="transition-delay:0.2s">
-        <div class="text-4xl mb-4">♿</div>
-        <h3 class="font-bold text-white mb-2">Samarth by Hyundai</h3>
-        <p class="text-slate-400 text-sm">Assisted in organizing awareness drives promoting inclusivity and accessibility for persons with disabilities, coordinating with Hyundai representatives.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- POSITIONS OF RESPONSIBILITY -->
-<section class="py-24 px-6 relative z-10">
-  <div class="max-w-5xl mx-auto">
-    <div class="reveal text-center mb-16">
-      <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Leadership</p>
-      <h2 class="text-4xl font-black">Positions of <span class="grad">Responsibility</span></h2>
-    </div>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="reveal card bg-[#0f172a] border border-violet-500/20 rounded-2xl p-6">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center text-lg">🎖️</div>
-          <div>
-            <h3 class="font-bold text-white">Placement Ambassador</h3>
-            <p class="text-violet-400 text-xs">ISBR Business School · Jul 2025–Present</p>
-          </div>
-        </div>
-        <p class="text-slate-400 text-sm">Coordinating with the placement cell, ensuring discipline during recruitment drives, and acting as a bridge between students and recruiters.</p>
-      </div>
-      <div class="reveal card bg-[#0f172a] border border-pink-500/20 rounded-2xl p-6" style="transition-delay:0.1s">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center text-lg">📣</div>
-          <div>
-            <h3 class="font-bold text-white">Campus Ambassador</h3>
-            <p class="text-pink-400 text-xs">Driving student participation</p>
-          </div>
-        </div>
-        <p class="text-slate-400 text-sm">Driving student participation by encouraging sign-ups and awareness, building a strong peer network and maintaining brand visibility within college.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="section-alt py-24 px-6 relative z-10">
-  <div class="max-w-3xl mx-auto text-center">
-    <div class="reveal mb-12">
-      <p class="text-indigo-400 text-sm font-semibold uppercase tracking-widest mb-2">Let's Connect</p>
-      <h2 class="text-4xl font-black mb-4">Get In <span class="grad">Touch</span></h2>
-      <p class="text-slate-400">I'm actively seeking internships and collaborations in business analytics, HR tech, and data-driven consulting. Let's talk!</p>
-    </div>
-    <div class="reveal grid sm:grid-cols-3 gap-6 mb-10">
-      <a href="mailto:namanvaja835@gmail.com" class="card bg-[#020817] border border-violet-500/20 rounded-2xl p-6 group block">
-        <div class="text-3xl mb-3 group-hover:scale-110 transition">📧</div>
-        <p class="text-xs text-slate-400 mb-1">Email</p>
-        <p class="text-white text-sm font-medium break-all">namanvaja835@gmail.com</p>
-      </a>
-      <a href="tel:+918320591929" class="card bg-[#020817] border border-pink-500/20 rounded-2xl p-6 group block">
-        <div class="text-3xl mb-3 group-hover:scale-110 transition">📞</div>
-        <p class="text-xs text-slate-400 mb-1">Phone</p>
-        <p class="text-white text-sm font-medium">+91 8320591929</p>
-      </a>
-      <a href="https://www.linkedin.com/in/naman-vaja-99472529a" target="_blank" class="card bg-[#020817] border border-indigo-500/20 rounded-2xl p-6 group block">
-        <div class="text-3xl mb-3 group-hover:scale-110 transition">🔗</div>
-        <p class="text-xs text-slate-400 mb-1">LinkedIn</p>
-        <p class="text-white text-sm font-medium">naman-vaja-99472529a</p>
-      </a>
-    </div>
-
-    <div class="reveal">
-      <form onsubmit="handleSubmit(event)" class="bg-[#020817] border border-white/5 rounded-2xl p-8 text-left">
-        <div class="grid sm:grid-cols-2 gap-4 mb-4">
-          <div>
-            <label class="text-xs text-slate-400 mb-1 block">Your Name</label>
-            <input type="text" placeholder="John Doe" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"/>
-          </div>
-          <div>
-            <label class="text-xs text-slate-400 mb-1 block">Your Email</label>
-            <input type="email" placeholder="john@example.com" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"/>
-          </div>
-        </div>
-        <div class="mb-4">
-          <label class="text-xs text-slate-400 mb-1 block">Message</label>
-          <textarea rows="4" placeholder="I'd love to connect about..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition resize-none"></textarea>
-        </div>
-        <button type="submit" class="btn-glow w-full py-3 rounded-xl text-white font-semibold text-sm"><span>Send Message ✈️</span></button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="py-8 px-6 border-t border-white/5 text-center relative z-10">
-  <p class="text-slate-500 text-sm">Designed & Built with ❤️ · <span class="grad font-semibold">Naman Vaja</span> © 2025</p>
-  <p class="text-slate-600 text-xs mt-1">PGDM Student · Business Analytics & HR · ISBR Business School, Bangalore</p>
-</footer>
-
-<!-- SCRIPTS -->
-<script>
-// === PARTICLES ===
-(function(){
-  const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-
-  for(let i=0;i<60;i++){
-    particles.push({
-      x: Math.random()*1920, y: Math.random()*1080,
-      vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
-      r: Math.random()*2+0.5,
-      a: Math.random()
-    });
-  }
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if(p.x<0)p.x=W; if(p.x>W)p.x=0;
-      if(p.y<0)p.y=H; if(p.y>H)p.y=0;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle = `rgba(99,102,241,${p.a*0.5})`;
-      ctx.fill();
-    });
-    // Lines
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
-        const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<120){
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x,particles[i].y);
-          ctx.lineTo(particles[j].x,particles[j].y);
-          ctx.strokeStyle=`rgba(99,102,241,${(1-dist/120)*0.12})`;
-          ctx.stroke();
+        // === FORM HANDLER ===
+        function handleSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerHTML = '<span>Message Sent! ✅</span>';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = '<span>Send Message ✈️</span>';
+                btn.disabled = false;
+                e.target.reset();
+            }, 3000);
         }
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-// === TYPEWRITER ===
-(function(){
-  const texts = [
-    'PGDM Student @ ISBR Bangalore',
-    'Business Analytics Enthusiast',
-    'HR & Data Strategy Explorer',
-    'Placement Ambassador',
-    'Generative AI Learner',
-  ];
-  let ti=0, ci=0, deleting=false;
-  const el = document.getElementById('typewriter');
-  function type(){
-    const current = texts[ti];
-    if(!deleting){
-      el.textContent = current.slice(0,ci++);
-      if(ci>current.length){ deleting=true; setTimeout(type,1800); return; }
-    } else {
-      el.textContent = current.slice(0,ci--);
-      if(ci<0){ deleting=false; ti=(ti+1)%texts.length; setTimeout(type,400); return; }
-    }
-    setTimeout(type, deleting?50:80);
-  }
-  type();
-})();
-
-// === SCROLL REVEAL ===
-(function(){
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-  },{threshold:0.1});
-  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
-})();
-
-// === SKILL BARS ===
-(function(){
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.querySelectorAll('.skill-fill').forEach(bar=>{
-          bar.style.width = bar.dataset.width + '%';
-        });
-      }
-    });
-  },{threshold:0.3});
-  const section = document.getElementById('skills');
-  if(section) obs.observe(section);
-})();
-
-// === COUNTER ANIMATION ===
-(function(){
-  const obs = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.querySelectorAll('[data-count]').forEach(el=>{
-          const target = parseInt(el.dataset.count);
-          let cur=0;
-          const interval = setInterval(()=>{
-            cur++;
-            el.textContent = cur;
-            if(cur>=target) clearInterval(interval);
-          },120);
-        });
-        obs.unobserve(e.target);
-      }
-    });
-  },{threshold:0.5});
-  const hero = document.getElementById('hero');
-  if(hero) obs.observe(hero);
-})();
-
-// === FORM HANDLER ===
-function handleSubmit(e){
-  e.preventDefault();
-  const btn = e.target.querySelector('button');
-  btn.innerHTML = '<span>Message Sent! ✅</span>';
-  btn.disabled = true;
-  setTimeout(()=>{
-    btn.innerHTML = '<span>Send Message ✈️</span>';
-    btn.disabled = false;
-    e.target.reset();
-  }, 3000);
-}
-</script>
+    </script>
 </body>
+
 </html>
